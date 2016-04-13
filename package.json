@@ -1,0 +1,45 @@
+{
+  "name": "reactfire-material-chat",
+  "version": "1.0.0",
+  "description": "Simple chat build with React, Firebase, material-ui",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --config webpack.config.js --progress --inline --colors",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ababol/reactfire-material-chat.git"
+  },
+  "author": "Arnaud Babol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ababol/reactfire-material-chat/issues"
+  },
+  "homepage": "https://github.com/ababol/reactfire-material-chat#readme",
+  "devDependencies": {
+    "babel-core": "^6.3.26",
+    "babel-eslint": "^6.0.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-1": "^6.5.0",
+    "eslint": "^2.5.1",
+    "eslint-plugin-react": "^4.0.0",
+    "html-webpack-plugin": "^2.7.2",
+    "react-hot-loader": "^1.3.0",
+    "transfer-webpack-plugin": "^0.1.4",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
+  },
+  "dependencies": {
+    "firebase": "^2.4.2",
+    "material-ui": "^0.15.0-alpha.2",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-mixin": "^3.0.4",
+    "react-router": "^2.1.1",
+    "react-tap-event-plugin": "^1.0.0",
+    "react-title-component": "^1.0.1",
+    "reactfire": "^0.6.0"
+  }
+}
