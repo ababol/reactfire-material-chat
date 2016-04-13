@@ -4,6 +4,10 @@ import Firebase from 'firebase';
 
 import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider';
+import RaisedButton from 'material-ui/lib/raised-button';
+import ActionAndroid from 'material-ui/lib/svg-icons/action/android';
+import typography from 'material-ui/lib/styles/typography';
+import {darkWhite} from 'material-ui/lib/styles/colors';
 
 import AppWrapper  from './AppWrapper';
 
@@ -15,6 +19,8 @@ const muiTheme = getMuiTheme({
   }
 });
 
+const firebaseRoot = new Firebase("https://dazzling-inferno-1669.firebaseio.com");
+
 const App = React.createClass({
 
   childContextTypes: {
@@ -24,9 +30,7 @@ const App = React.createClass({
 
   componentWillMount() {
     const _this = this;
-    var ref = new Firebase("https://dazzling-inferno-1669.firebaseio.com");
-    ref.onAuth(function(authData) {
-      console.log('onauth', authData)
+    firebaseRoot.onAuth(function(authData) {
       if (authData) {
         const user = {
           provider: authData.provider,
@@ -34,20 +38,18 @@ const App = React.createClass({
           img: authData.google.profileImageURL
         };
 
-        _this.setState({ user: user });
-
         // save the user's profile into the database so we can list users,
         // use them in Security and Firebase Rules, and show profiles
-        ref.child("users").child(authData.uid).set(user);
-      } else {
-        ref.authWithOAuthRedirect("google", function(error) {
-          if (error) {
-            console.log("Login Failed!", error);
-          } else {
-            // We'll never get here, as the page will redirect on success.
-          }
-        });
+        firebaseRoot.child("users").child(authData.uid).set(user);
+
+        _this.setState({ user: user });
       }
+    });
+  },
+
+  login() {
+    firebaseRoot.authWithOAuthRedirect("google", function(error) {
+      console.log("Login Failed!", error);
     });
   },
 
@@ -65,16 +67,75 @@ const App = React.createClass({
     };
   },
 
+  getStyles() {
+    return {
+      landing: {
+        backgroundColor: palette.primary1Color,
+        height: '100%',
+        display: 'flex',
+      },
+      container: {
+        margin: '0 auto',
+        alignSelf: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        maxWidth: 400
+      },
+
+      h1: {
+        color: darkWhite,
+        fontWeight: typography.fontWeightLight,
+      },
+      h2: {
+        fontSize: 20,
+        lineHeight: '28px',
+        letterSpacing: 0,
+      },
+      demoStyle: {
+        margin: '16px 32px 0px 32px',
+      },
+
+      label: {
+        color: palette.primary1Color,
+      },
+    }
+  },
+
   render() {
+    const styles = this.getStyles();
+    let render = null;
+
     if (!this.state.user) {
-      return (
-        <h1>You need to authentificate first</h1>
+      render = (
+        <div style={styles.landing}>
+          <div style={styles.container}>
+
+            <h1 style={styles.h1}>reactfire-material-chat</h1>
+            <h2 style={styles.h2}>
+              Simple chat build with React, Firebase & material-ui
+            </h2>
+            <RaisedButton
+              className="demo-button"
+              label="Login"
+              linkButton={true}
+              onTouchTap={this.login}
+              style={styles.demoStyle}
+              labelStyle={styles.label}
+            />
+          </div>
+        </div>
+      );
+    } else {
+      render = (
+        <AppWrapper content={this.props.children} />
       );
     }
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <AppWrapper content={this.props.children} />
+        {render}
       </MuiThemeProvider>
     );
   }

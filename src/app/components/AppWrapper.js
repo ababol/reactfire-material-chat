@@ -11,21 +11,12 @@ import LeftNav from 'material-ui/lib/left-nav';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import TextField from 'material-ui/lib/text-field';
 import AppBar from 'material-ui/lib/app-bar';
-import IconButton from 'material-ui/lib/icon-button';
 import Title from 'react-title-component';
 import spacing from 'material-ui/lib/styles/spacing';
 import {StyleResizable} from 'material-ui/lib/mixins';
+import Avatar from 'material-ui/lib/avatar';
 
 import {Link} from 'react-router';
-
-
-const githubButton = (
-  <IconButton
-    iconClassName="muidocs-icon-custom-github"
-    href="https://github.com/callemall/material-ui"
-    linkButton={true}
-  />
-);
 
 const AppWrapper = React.createClass({
   contextTypes: {
@@ -60,9 +51,18 @@ const AppWrapper = React.createClass({
       },
       appBar: {
         position: 'fixed',
-        // Needed to overlap the examples
         zIndex: 1301,
         top: 0,
+      },
+      rightIconAvatar: {
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+      },
+      avatar: {
+        marginTop: 3,
+        marginLeft: 10,
+        marginRight: 10,
       },
       navDrawer: {
         zIndex:0,
@@ -134,6 +134,16 @@ const AppWrapper = React.createClass({
     this.bindAsArray(ref, "rooms");
   },
 
+  getMenuStyle(roomKey) {
+    const roomId = window.location.hash.split('/').pop();
+
+    if (roomKey === roomId) {
+      return { backgroundColor: this.context.muiTheme.palette.primary1Color };
+    } else {
+      return { backgroundColor: 'white' };
+    }
+  },
+
   render() {
     const actions = [
       <FlatButton
@@ -153,6 +163,7 @@ const AppWrapper = React.createClass({
         <MenuItem
           key={room['.key']}
           containerElement={<Link to={`room/${room['.key']}`} />}
+          style={this.getMenuStyle(room['.key'])}
         >
           {room.roomTitle}
         </MenuItem>
@@ -178,7 +189,6 @@ const AppWrapper = React.createClass({
         zIndex: styles.appBar.zIndex - 1,
       };
       styles.root.paddingLeft = 256;
-      // styles.footer.paddingLeft = 256;
     }
 
     return (
@@ -186,9 +196,14 @@ const AppWrapper = React.createClass({
         <Title render="Chat" />
         <AppBar
           onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
-          title={'test'}
+          title={'Chat'}
           zDepth={0}
-          iconElementRight={githubButton}
+          iconElementRight={
+            <div style={styles.rightIconAvatar}>
+              {this.context.user.displayName}
+              <Avatar src={this.context.user.img} style={styles.avatar} />
+            </div>
+          }
           style={styles.appBar}
           showMenuIconButton={showMenuIconButton}
         />
@@ -212,9 +227,7 @@ const AppWrapper = React.createClass({
           <MenuItem
             onTouchTap={this.handleOpen}
             style={styles.menuHeader}
-            rightIcon={
-              <AddCircle color={'#FFF'} style={{color: '#559'}} />
-            }
+            rightIcon={<AddCircle />}
           >
             Add a Room
           </MenuItem>

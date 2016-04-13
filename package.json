@@ -4,7 +4,8 @@
   "description": "Simple chat build with React, Firebase, material-ui",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.js --progress --inline --colors",
+    "dev": "webpack-dev-server --config webpack-dev-server.config.js --progress --inline --colors",
+    "start": "webpack --config webpack-production.config.js --progress --colors && node build/server"
   },
   "repository": {
     "type": "git",
@@ -14,6 +15,9 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ababol/reactfire-material-chat/issues"
+  },
+  "engines": {
+    "node": "5.9.1"
   },
   "homepage": "https://github.com/ababol/reactfire-material-chat#readme",
   "devDependencies": {

@@ -5,7 +5,6 @@ import reactMixin from 'react-mixin';
 import Firebase from 'firebase';
 
 import TextMessage from './TextMessage';
-import Message from './Message';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import Divider from 'material-ui/lib/divider';
@@ -17,7 +16,6 @@ const Room = React.createClass({
     user: React.PropTypes.object.isRequired,
   },
   componentWillMount() {
-    console.log(this.context.user);
     const roomId = this.props.params.roomId;
     // var listRef = new Firebase("https://dazzling-inferno-1669.firebaseio.com/presence/");
     // var userRef = listRef.push();
@@ -60,7 +58,6 @@ const Room = React.createClass({
   },
 
   render() {
-    console.log(this.state.room);
     let messages = this.state.messages.map((message) => {
       return (
         <ListItem
@@ -68,6 +65,7 @@ const Room = React.createClass({
           primaryText={message.user.displayName}
           secondaryText={message.message}
           secondaryTextLines={2}
+          key={message['.key']}
         />
       )
     });

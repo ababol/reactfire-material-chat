@@ -10,9 +10,21 @@ class TextMessage extends React.Component {
     }
   }
 
+  getStyles() {
+    return {
+      inputBottom: {
+        position: 'fixed',
+        bottom: 0,
+        backgroundColor: 'white',
+      }
+    }
+  }
+
   render() {
+    const styles = this.getStyles();
+
     return (
-      <div>
+      <div style={styles.inputBottom}>
         <TextField
           onChange={this.props.onChange}
           onKeyPress={this._handleKeyPress}
