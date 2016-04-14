@@ -168,7 +168,8 @@ const AppWrapper = React.createClass({
           {room.roomTitle}
         </MenuItem>
       )
-    });
+    })
+    .reverse();
 
     const styles = this.getStyles();
 
