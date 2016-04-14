@@ -138,9 +138,12 @@ const AppWrapper = React.createClass({
     const roomId = window.location.hash.split('/').pop();
 
     if (roomKey === roomId) {
-      return { backgroundColor: this.context.muiTheme.palette.primary1Color };
+      return {
+        backgroundColor: this.context.muiTheme.palette.primary1Color,
+        color: 'white',
+      };
     } else {
-      return { backgroundColor: 'white' };
+      return {};
     }
   },
 
