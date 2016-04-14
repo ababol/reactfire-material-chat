@@ -134,10 +134,11 @@ const AppWrapper = React.createClass({
     this.bindAsArray(ref, "rooms");
   },
 
-  getMenuStyle(roomKey) {
+  getMenuStyle(roomKey, roomTitle) {
     const roomId = window.location.hash.split('/').pop();
 
     if (roomKey === roomId) {
+      this.currentRoom = roomTitle;
       return {
         backgroundColor: this.context.muiTheme.palette.primary1Color,
         color: 'white',
@@ -166,7 +167,7 @@ const AppWrapper = React.createClass({
         <MenuItem
           key={room['.key']}
           containerElement={<Link to={`room/${room['.key']}`} />}
-          style={this.getMenuStyle(room['.key'])}
+          style={this.getMenuStyle(room['.key'], room.roomTitle)}
         >
           {room.roomTitle}
         </MenuItem>
@@ -197,10 +198,10 @@ const AppWrapper = React.createClass({
 
     return (
       <div>
-        <Title render="Chat" />
+        <Title render={this.currentRoom || "Chat"} />
         <AppBar
           onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
-          title={'Chat'}
+          title={this.currentRoom || 'Chat'}
           zDepth={0}
           iconElementRight={
             <div style={styles.rightIconAvatar}>
