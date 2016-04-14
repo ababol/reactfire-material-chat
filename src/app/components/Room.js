@@ -1,7 +1,6 @@
 import React from 'react';
 
 import ReactFireMixin from 'reactfire';
-import reactMixin from 'react-mixin';
 import Firebase from 'firebase';
 
 import TextMessage from './TextMessage';
@@ -15,6 +14,11 @@ const Room = React.createClass({
     muiTheme: React.PropTypes.object.isRequired,
     user: React.PropTypes.object.isRequired,
   },
+
+  mixins: [
+    ReactFireMixin
+  ],
+
   componentWillMount() {
     const roomId = this.props.params.roomId;
     // var listRef = new Firebase("https://dazzling-inferno-1669.firebaseio.com/presence/");
@@ -84,7 +88,5 @@ const Room = React.createClass({
     );
   }
 });
-
-reactMixin(Room.prototype, ReactFireMixin);
 
 export default Room;

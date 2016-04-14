@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  Router,
-  Route,
-  browserHistory,
-} from 'react-router';
+import { Route } from 'react-router';
 
 // Here we define all our material-ui ReactComponents.
 import App from './components/App';
@@ -19,17 +15,13 @@ import NoMatch from './components/NoMatch';
  * The react router will search for a route named 'paper' and will recursively render its
  * handler and its parent handler like so: Paper > Components > Master
  */
- //
- // <Route path="*" component={NoMatch}/>
 const AppRoutes = (
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <Route path="rooms" component={Room}>
-        <Route path="/room/:roomId" component={Room}/>
-      </Route>
-      <Route path="*" component={NoMatch}/>
+  <Route path="/" component={App}>
+    <Route path="rooms" component={Room}>
+      <Route path="/room/:roomId" component={Room}/>
     </Route>
-  </Router>
+    <Route path="*" component={NoMatch}/>
+  </Route>
 );
 
 export default AppRoutes;
