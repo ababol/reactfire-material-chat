@@ -6,7 +6,6 @@ import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider';
 import RaisedButton from 'material-ui/lib/raised-button';
 import ActionAndroid from 'material-ui/lib/svg-icons/action/android';
-import typography from 'material-ui/lib/styles/typography';
 import {darkWhite} from 'material-ui/lib/styles/colors';
 
 import AppWrapper  from './AppWrapper';
@@ -86,12 +85,14 @@ const App = React.createClass({
 
       h1: {
         color: darkWhite,
-        fontWeight: typography.fontWeightLight,
+        fontSize: 30,
+        fontWeight: 400,
       },
       h2: {
         fontSize: 20,
         lineHeight: '28px',
         letterSpacing: 0,
+        fontWeight: 100,
       },
       demoStyle: {
         margin: '16px 32px 0px 32px',

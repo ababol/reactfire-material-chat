@@ -214,7 +214,7 @@ const AppWrapper = React.createClass({
 
         <div style={(styles.root)}>
           <div style={(styles.content)}>
-            {this.props.content}
+            {this.props.content || 'Please select a room or create a new one.'}
           </div>
         </div>
 
