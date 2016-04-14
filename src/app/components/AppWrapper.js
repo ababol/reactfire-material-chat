@@ -60,7 +60,7 @@ const AppWrapper = React.createClass({
         alignItems: 'center',
       },
       avatar: {
-        marginTop: 3,
+        marginTop: 4,
         marginLeft: 10,
         marginRight: 10,
       },
@@ -204,7 +204,7 @@ const AppWrapper = React.createClass({
           zDepth={0}
           iconElementRight={
             <div style={styles.rightIconAvatar}>
-              {this.context.user.displayName}
+              <span style={{marginTop: 2}}>{this.context.user.displayName}</span>
               <Avatar src={this.context.user.img} style={styles.avatar} />
             </div>
           }
